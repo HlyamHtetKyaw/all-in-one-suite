@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Upload, Play, Pause, Wand2, Download, AlertCircle, Loader2, Sparkles, ChevronDown, Volume2, VolumeX, Music, PlayCircle, RefreshCw, Type, Subtitles, FileText, Clock } from 'lucide-react';
+import { Upload, Play, Pause, Wand2, Download, AlertCircle, Loader2, Sparkles, ChevronDown, Volume2, VolumeX, Music, PlayCircle, RefreshCw, Type, Subtitles, Clock } from 'lucide-react';
 
 // --- Safe Environment Variable Helper ---
 const getEnv = (key: string, fallback: string) => {
