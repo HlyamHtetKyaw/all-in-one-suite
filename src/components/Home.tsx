@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 type FeatureStatus = 'available' | 'planned';
 
@@ -16,9 +17,9 @@ interface FeatureCard {
 const FEATURES: FeatureCard[] = [
   {
     id: 'transcribe',
-    category: 'Video to Text',
-    title: 'Transcribe',
-    description: 'Convert media to accurate word-for-word transcripts.',
+    category: 'Auto Caption',
+    title: 'Auto Caption',
+    description: 'Automatically generate captions from video to text.',
     accentFrom: 'from-indigo-500',
     accentTo: 'to-blue-500',
     status: 'available',
@@ -28,10 +29,11 @@ const FEATURES: FeatureCard[] = [
     id: 'video-recap',
     category: 'Studio Editor',
     title: 'Video Recap',
-    description: 'Create AI-powered recap videos from long content.',
+    description: 'Sync voiceovers, remove original audio, and add logos.',
     accentFrom: 'from-sky-500',
     accentTo: 'to-cyan-400',
-    status: 'planned',
+    status: 'available',
+    href: '/video-recap',
   },
   {
     id: 'master-editor',
@@ -40,7 +42,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Browser-based video/audio editing with AI assist.',
     accentFrom: 'from-slate-800',
     accentTo: 'to-slate-600',
-    status: 'planned',
+    status: 'available',
+    href: '/master-editor',
   },
   {
     id: 'recapper',
@@ -49,7 +52,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Turn videos into recap scripts with tone and POV.',
     accentFrom: 'from-emerald-500',
     accentTo: 'to-lime-400',
-    status: 'planned',
+    status: 'available',
+    href: '/recapper',
   },
   {
     id: 'content-creator',
@@ -58,7 +62,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Write hooks, captions, and social-ready scripts.',
     accentFrom: 'from-rose-500',
     accentTo: 'to-pink-500',
-    status: 'planned',
+    status: 'available',
+    href: '/content-creator',
   },
   {
     id: 'story-creator',
@@ -67,7 +72,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Generate long-form storylines and narratives.',
     accentFrom: 'from-purple-500',
     accentTo: 'to-fuchsia-500',
-    status: 'planned',
+    status: 'available',
+    href: '/story-creator',
   },
   {
     id: 'thumbnail',
@@ -76,7 +82,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Design scroll-stopping thumbnails with prompts.',
     accentFrom: 'from-amber-500',
     accentTo: 'to-orange-500',
-    status: 'planned',
+    status: 'available',
+    href: '/thumbnail',
   },
   {
     id: 'translate',
@@ -85,7 +92,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Multi-language translation for scripts and captions.',
     accentFrom: 'from-emerald-500',
     accentTo: 'to-teal-400',
-    status: 'planned',
+    status: 'available',
+    href: '/translate',
   },
   {
     id: 'srt-sub',
@@ -94,7 +102,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Translate and adapt existing SRT subtitle files.',
     accentFrom: 'from-sky-500',
     accentTo: 'to-blue-400',
-    status: 'planned',
+    status: 'available',
+    href: '/srt-sub',
   },
   {
     id: 'novel-translate',
@@ -103,7 +112,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Translate long-form documents and ebooks.',
     accentFrom: 'from-orange-500',
     accentTo: 'to-amber-400',
-    status: 'planned',
+    status: 'available',
+    href: '/novel-translator',
   },
   {
     id: 'ai-voice',
@@ -112,7 +122,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Turn scripts into natural-sounding voices.',
     accentFrom: 'from-pink-500',
     accentTo: 'to-rose-500',
-    status: 'planned',
+    status: 'available',
+    href: '/ai-voice',
   },
   {
     id: 'voice-gen',
@@ -121,7 +132,8 @@ const FEATURES: FeatureCard[] = [
     description: 'Generate live narration with smart pausing.',
     accentFrom: 'from-violet-500',
     accentTo: 'to-indigo-500',
-    status: 'planned',
+    status: 'available',
+    href: '/voice-gen-live',
   },
   {
     id: 'sub-gen',
@@ -130,7 +142,28 @@ const FEATURES: FeatureCard[] = [
     description: 'Create perfectly-timed SRT subtitle files.',
     accentFrom: 'from-blue-500',
     accentTo: 'to-cyan-400',
-    status: 'planned',
+    status: 'available',
+    href: '/sub-gen',
+  },
+  {
+    id: 'transcribe-feature',
+    category: 'Video to Text',
+    title: 'Transcribe',
+    description: 'Convert audio or video to text transcription.',
+    accentFrom: 'from-indigo-500',
+    accentTo: 'to-blue-500',
+    status: 'available',
+    href: '/transcribe',
+  },
+  {
+    id: 'news-automation',
+    category: 'Automation',
+    title: 'News Automation',
+    description: 'Automate news collection, translation, and email delivery.',
+    accentFrom: 'from-orange-500',
+    accentTo: 'to-amber-500',
+    status: 'available',
+    href: '/news-automation',
   },
 ];
 
@@ -142,6 +175,7 @@ interface HomeProps {
 
 export default function Home({ isAuthenticated, user, onLoginClick }: HomeProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleFeatureClick = (feature: FeatureCard) => {
     if (feature.status === 'available' && feature.href) {
@@ -264,7 +298,7 @@ export default function Home({ isAuthenticated, user, onLoginClick }: HomeProps)
                       : 'border-white/20 bg-white/8 text-white/60'
                   }`}
                 >
-                  {isAvailable ? 'Available' : 'Coming soon'}
+                  {isAvailable ? t('home.available') : t('home.comingSoon')}
                 </span>
                 {isAvailable && feature.href === '/caption-studio' && (
                   <span className="text-white/70">Open studio →</span>

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Upload, FileVideo, Loader2, AlertCircle, LayoutTemplate } from 'lucide-react';
+import { Upload, Loader2, AlertCircle, FileText, Type, HelpCircle } from 'lucide-react';
+import HelpDialog from './HelpDialog';
 
 interface WhisperWord {
   word: string;
@@ -31,6 +32,7 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
   const [error, setError] = useState<string | null>(null);
   const [captions, setCaptions] = useState<CaptionResponse | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
+  const [showHelp, setShowHelp] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -101,11 +103,11 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
     return (
       <section className="mt-6 rounded-[2.5rem] border border-white/15 bg-white/6 backdrop-blur-3xl p-10 flex flex-col items-center justify-center text-center space-y-4 shadow-2xl">
         <div className="p-4 rounded-full bg-white/10 border border-white/20 mb-2">
-          <LayoutTemplate className="w-8 h-8 text-purple-300" />
+          <FileText className="w-8 h-8 text-purple-300" />
         </div>
-        <h2 className="text-2xl font-semibold">Sign in to unlock your studio</h2>
+        <h2 className="text-2xl font-semibold">Sign in to unlock Auto Caption</h2>
         <p className="text-sm md:text-base text-white/65 max-w-md">
-          Login or create an account to access captioning, dubbing and news automation features in one place.
+          Login or create an account to automatically generate captions from video to text.
         </p>
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <button
@@ -126,15 +128,31 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="p-3 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-2xl">
+          <Type className="w-6 h-6 text-white" />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-semibold text-white">Auto Caption</h1>
+            <button
+              onClick={() => setShowHelp(true)}
+              className="p-1.5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg hover:bg-white/15 transition-all duration-300"
+            >
+              <HelpCircle className="w-4 h-4 text-white/60" />
+            </button>
+          </div>
+          <p className="text-sm text-white/60">Automatically generate captions from video to text</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="space-y-6">
         <div 
-          className={`border-2 border-dashed rounded-[2.5rem] p-8 transition-all duration-500 flex flex-col items-center justify-center text-center space-y-4 backdrop-blur-3xl shadow-2xl
-            ${file ? 'border-purple-400/40 bg-white/8 backdrop-blur-3xl shadow-purple-500/20' : 'border-white/15 hover:border-purple-400/40 bg-white/6 hover:bg-white/10 hover:shadow-purple-500/10'}`}
+          className="border-2 border-dashed rounded-[2.5rem] p-12 transition-all duration-500 flex flex-col items-center justify-center text-center space-y-6 backdrop-blur-3xl shadow-2xl border-white/15 bg-white/6 hover:border-purple-400/40 hover:bg-white/10"
           style={{
-            background: file 
-              ? 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(147,51,234,0.1) 100%)'
-              : 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.08) 100%)'
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.08) 100%)'
           }}
         >
           <input 
@@ -147,16 +165,16 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
           
           {!file ? (
             <>
-              <div className="p-5 bg-white/12 backdrop-blur-2xl rounded-full border border-white/25 shadow-xl hover:scale-110 transition-transform duration-300">
-                <Upload className="w-10 h-10 text-purple-400" />
+              <div className="p-6 bg-white/12 backdrop-blur-2xl rounded-full border border-white/25 shadow-xl">
+                <Upload className="w-16 h-16 text-purple-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg text-white">Select a video</h3>
-                <p className="text-white/50 text-sm mt-1">MP4, MOV up to 500MB</p>
+                <h3 className="font-semibold text-xl text-white mb-2">Select a video</h3>
+                <p className="text-white/50 text-sm">MP4, MOV up to 500MB</p>
               </div>
               <button 
                 onClick={() => fileInputRef.current?.click()}
-                className="mt-2 px-8 py-3 bg-white/12 backdrop-blur-2xl text-white font-medium rounded-full hover:bg-white/18 hover:scale-105 border border-white/25 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
+                className="mt-4 px-8 py-3 bg-white/12 backdrop-blur-2xl text-white font-medium rounded-full hover:bg-white/18 hover:scale-105 border border-white/25 transition-all duration-300 shadow-xl hover:shadow-2xl"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.08) 100%)'
                 }}
@@ -166,17 +184,17 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
             </>
           ) : (
             <>
-              <div className="p-5 bg-white/12 backdrop-blur-2xl rounded-full border border-purple-400/30 shadow-xl">
-                <FileVideo className="w-10 h-10 text-purple-400" />
+              <div className="p-6 bg-white/12 backdrop-blur-2xl rounded-full border border-purple-400/30 shadow-xl">
+                <Upload className="w-16 h-16 text-purple-400" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg line-clamp-1 break-all text-white">{file.name}</h3>
-                <p className="text-white/50 text-sm mt-1">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+                <h3 className="font-semibold text-lg line-clamp-1 break-all text-white mb-1">{file.name}</h3>
+                <p className="text-white/50 text-sm">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
               </div>
-              <div className="flex space-x-3 mt-2">
+              <div className="flex space-x-3 mt-4">
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-5 py-2.5 bg-white/10 backdrop-blur-2xl text-white text-sm font-medium rounded-full hover:bg-white/18 hover:scale-105 border border-white/20 transition-all duration-300 shadow-lg active:scale-95"
+                  className="px-5 py-2.5 bg-white/10 backdrop-blur-2xl text-white text-sm font-medium rounded-full hover:bg-white/18 hover:scale-105 border border-white/20 transition-all duration-300 shadow-lg"
                   disabled={isLoading}
                   style={{
                     background: 'linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.06) 100%)'
@@ -187,7 +205,7 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
                 <button 
                   onClick={handleUpload}
                   disabled={isLoading || !!captions}
-                  className="px-7 py-3 bg-gradient-to-r from-purple-500/90 to-purple-600/90 backdrop-blur-2xl text-white text-sm font-medium rounded-full hover:from-purple-600 hover:to-purple-700 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 flex items-center space-x-2 shadow-xl shadow-purple-500/40 border border-purple-400/40 active:scale-95"
+                  className="px-7 py-3 bg-gradient-to-r from-purple-500/90 to-purple-600/90 backdrop-blur-2xl text-white text-sm font-medium rounded-full hover:from-purple-600 hover:to-purple-700 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 flex items-center space-x-2 shadow-xl shadow-purple-500/40 border border-purple-400/40"
                 >
                   {isLoading ? (
                     <>
@@ -206,7 +224,7 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
         </div>
 
         {error && (
-          <div className="backdrop-blur-3xl bg-red-500/15 border border-red-400/40 text-red-200 p-4 rounded-full flex items-start space-x-3 shadow-2xl shadow-red-500/30 animate-in slide-in-from-top-2 duration-300"
+          <div className="backdrop-blur-3xl bg-red-500/15 border border-red-400/40 text-red-200 p-4 rounded-full flex items-start space-x-3 shadow-2xl shadow-red-500/30"
             style={{
               background: 'linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.10) 100%)'
             }}
@@ -219,7 +237,7 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
         )}
 
         {videoUrl && (
-          <div className="relative rounded-[2.5rem] overflow-hidden backdrop-blur-3xl aspect-[9/16] max-h-[600px] mx-auto w-full max-w-sm shadow-2xl ring-2 ring-white/15 border-2 border-white/10 hover:border-white/20 transition-all duration-500"
+          <div className="relative rounded-[2.5rem] overflow-hidden backdrop-blur-3xl aspect-video w-full shadow-2xl border-2 border-white/15"
             style={{
               background: 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)'
             }}
@@ -234,7 +252,7 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
             
             {currentChunk && (
               <div className="absolute inset-x-0 bottom-20 flex justify-center items-center pointer-events-none p-4">
-                <div className="backdrop-blur-3xl bg-black/40 rounded-full px-6 py-3 border border-white/20 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-300"
+                <div className="backdrop-blur-3xl bg-black/40 rounded-full px-6 py-3 border border-white/20 shadow-2xl"
                   style={{
                     background: 'linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%)'
                   }}
@@ -264,30 +282,21 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
       </div>
 
       <div className="space-y-6">
-        <div className="backdrop-blur-3xl rounded-[2.5rem] p-6 border border-white/15 h-[calc(100vh-12rem)] overflow-y-auto shadow-2xl hover:border-white/25 transition-all duration-500"
+        <div className="backdrop-blur-3xl rounded-[2.5rem] p-6 border border-white/15 h-[calc(100vh-12rem)] overflow-y-auto shadow-2xl"
           style={{
             background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.05) 100%)'
           }}
         >
-          <h2 className="text-xl font-semibold mb-6 flex items-center justify-between text-white">
-            <span>Transcript Chunks</span>
-            {captions && (
-              <span className="text-sm font-medium px-4 py-2 bg-green-500/20 backdrop-blur-2xl text-green-300 rounded-full border border-green-400/40 shadow-xl"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(34,197,94,0.2) 0%, rgba(22,163,74,0.15) 100%)'
-                }}
-              >
-                {captions.chunks.length} chunks
-              </span>
-            )}
+          <h2 className="text-xl font-semibold mb-6 text-white">
+            Transcript Chunks
           </h2>
 
           {!captions ? (
             <div className="h-full flex flex-col items-center justify-center text-white/40 space-y-4 pb-20">
-              <div className="p-4 bg-white/8 backdrop-blur-2xl rounded-full border border-white/15">
-                <LayoutTemplate className="w-12 h-12 opacity-50 text-purple-400" />
+              <div className="p-6 bg-white/8 backdrop-blur-2xl rounded-full border border-white/15">
+                <FileText className="w-16 h-16 opacity-50 text-purple-400" />
               </div>
-              <p>Upload a video to see the generated chunks here.</p>
+              <p className="text-white/50">Upload a video to see the generated chunks here.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -296,7 +305,7 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
                 return (
                   <div 
                     key={index} 
-                    className={`p-4 rounded-2xl transition-all duration-500 cursor-pointer border backdrop-blur-2xl shadow-lg hover:scale-[1.01] active:scale-[0.99] ${
+                    className={`p-4 rounded-2xl transition-all duration-500 cursor-pointer border backdrop-blur-2xl shadow-lg hover:scale-[1.01] ${
                       isActive 
                         ? 'bg-purple-500/25 border-purple-400/60 shadow-purple-500/30 scale-[1.02]' 
                         : 'bg-white/6 border-white/12 hover:border-purple-400/50 hover:bg-white/10'
@@ -328,6 +337,28 @@ export default function CaptionStudio({ isAuthenticated, onLoginClick }: Caption
           )}
         </div>
       </div>
+      </div>
+
+      <HelpDialog
+        isOpen={showHelp}
+        onClose={() => setShowHelp(false)}
+        title="How to Use Auto Caption"
+        content={
+          <>
+            <p><strong>Step 1: Upload Video</strong></p>
+            <p>Click "Browse Files" or drag and drop a video file (MP4, MOV up to 500MB) into the upload area.</p>
+            
+            <p><strong>Step 2: Generate Captions</strong></p>
+            <p>Click "Generate Captions" to process your video. The system will automatically transcribe the audio and create timed caption chunks.</p>
+            
+            <p><strong>Step 3: Review Transcript Chunks</strong></p>
+            <p>View the generated transcript chunks in the right panel. Each chunk shows the text and time range. Click on any chunk to jump to that moment in the video.</p>
+            
+            <p><strong>Step 4: Watch with Captions</strong></p>
+            <p>Play the video to see word-by-word caption highlighting synchronized with the audio. The current word is highlighted in yellow.</p>
+          </>
+        }
+      />
     </div>
   );
 }
