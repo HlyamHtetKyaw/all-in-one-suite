@@ -91,7 +91,7 @@ export default function App() {
     }
   };
 
-  // Find the current chunk and active word for rendering the viral overlay
+  // Find the current chunk for rendering the subtitle
   const currentChunk = captions?.chunks.find(
     (chunk) => currentTime >= chunk.start && currentTime <= chunk.end + 0.5 // +0.5s padding to keep it on screen slightly longer
   );
@@ -197,23 +197,25 @@ export default function App() {
                   onTimeUpdate={handleTimeUpdate}
                 />
                 
-                {/* VIRAL CAPTION OVERLAY */}
+                {/* PRECISE VIRAL CAPTION OVERLAY */}
                 {currentChunk && (
                   <div className="absolute inset-x-0 bottom-24 flex justify-center items-center pointer-events-none p-4">
                     <div className="text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
-                      <p className="font-black text-4xl leading-tight tracking-tight flex flex-wrap justify-center gap-2" style={{ textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000' }}>
+                      <p 
+                        className="font-black text-4xl text-white leading-tight tracking-tight flex flex-wrap justify-center gap-2" 
+                        style={{ textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000' }}
+                      >
                         {currentChunk.words.map((wordObj, i) => {
-                          // Check if this specific word is currently being spoken
+                          // Precise check for highlighting based exactly on the word's timestamps
                           const isCurrentWord = currentTime >= wordObj.start && currentTime <= wordObj.end;
                           
-                          // Active word is yellow and slightly scaled up (Alex Hormozi style)
                           return (
                             <span 
                               key={i} 
-                              className={`transition-all duration-75 ease-in-out ${
+                              className={`transition-all duration-150 ease-out ${
                                 isCurrentWord 
                                   ? 'text-yellow-400 scale-110 translate-y-[-2px]' 
-                                  : 'text-white'
+                                  : 'text-white scale-100'
                               }`}
                             >
                               {wordObj.word}
