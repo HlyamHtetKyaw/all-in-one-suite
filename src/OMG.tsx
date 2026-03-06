@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Upload, Play, Pause, Type, Move, Mic, Wand2, Download, Trash2, Languages } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Upload, Play, Pause, Move, Mic, Wand2, Download, Languages } from 'lucide-react';
 
 // --- Types ---
 interface Subtitle {
@@ -27,9 +27,8 @@ export default function Main() {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
-  const [selectedSubtitleId, setSelectedSubtitleId] = useState<string | null>(null);
+  const [, setSelectedSubtitleId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [showBurmeseTranslate, setShowBurmeseTranslate] = useState<boolean>(false); // UI toggle for future feature
 
   // --- Refs ---
   const videoRef = useRef<HTMLVideoElement>(null);

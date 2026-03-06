@@ -12,11 +12,15 @@
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
+    "@react-oauth/google": "^0.12.1",
     "@supabase/supabase-js": "^2.97.0",
     "@tailwindcss/vite": "^4.1.18",
+    "i18next": "^25.8.14",
     "lucide-react": "^0.574.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-i18next": "^16.5.5",
+    "react-router-dom": "^6.28.0",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {

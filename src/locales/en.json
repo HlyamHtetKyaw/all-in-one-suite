@@ -1,0 +1,352 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "signUp": "Sign up",
+    "points": "POINTS",
+    "home": "Home",
+    "aiModels": "AI Models",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "copy": "Copy",
+    "download": "Download",
+    "upload": "Upload",
+    "generate": "Generate",
+    "preview": "Preview",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "select": "Select",
+    "change": "Change",
+    "remove": "Remove",
+    "start": "Start",
+    "stop": "Stop",
+    "play": "Play",
+    "pause": "Pause",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "auth": {
+    "continueWithGoogle": "Continue with Google",
+    "loginWithCode": "Login with Code",
+    "enterLoginCode": "Enter your login code",
+    "register": "Register",
+    "email": "Email",
+    "name": "Name",
+    "loginCode": "Login Code",
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "signIn": "Sign in",
+    "signInToUnlock": "Sign in to unlock",
+    "loginOrCreateAccount": "Login or create an account"
+  },
+  "features": {
+    "autoCaption": {
+      "title": "Auto Caption",
+      "description": "Automatically generate captions from video to text",
+      "category": "Auto Caption",
+      "uploadVideo": "Upload Video",
+      "browseFiles": "Browse Files",
+      "generateCaptions": "Generate Captions",
+      "transcriptChunks": "Transcript Chunks",
+      "noCaptions": "No captions generated yet",
+      "help": {
+        "step1": "Step 1: Upload Video",
+        "step1Desc": "Click \"Browse Files\" or drag and drop a video file (MP4, MOV up to 500MB) into the upload area.",
+        "step2": "Step 2: Generate Captions",
+        "step2Desc": "Click \"Generate Captions\" to process your video. The system will automatically transcribe the audio and create timed caption chunks.",
+        "step3": "Step 3: Review Transcript Chunks",
+        "step3Desc": "View the generated transcript chunks in the right panel. Each chunk shows the text and time range. Click on any chunk to jump to that moment in the video.",
+        "step4": "Step 4: Watch with Captions",
+        "step4Desc": "Play the video to see word-by-word caption highlighting synchronized with the audio. The current word is highlighted in yellow."
+      }
+    },
+    "aiVoice": {
+      "title": "AI Voice",
+      "description": "Turn scripts into natural-sounding voices",
+      "category": "AI Voice",
+      "enterScript": "Enter your script",
+      "selectVoiceStyle": "Select Voice Style",
+      "generateVoice": "Generate Voice",
+      "help": {
+        "step1": "Step 1: Enter Your Script",
+        "step1Desc": "Type or paste your text script into the input area. This will be converted to speech.",
+        "step2": "Step 2: Select Voice Style",
+        "step2Desc": "Choose from Woman, Man, Boy, or Girl voice styles to match your content needs.",
+        "step3": "Step 3: Generate Audio",
+        "step3Desc": "Click \"Generate Voice\" to create the audio. The system will process your text and generate natural-sounding speech.",
+        "step4": "Step 4: Preview & Download",
+        "step4Desc": "Use the audio player to preview your generated voice. Adjust playback speed if needed, then download the audio file when satisfied."
+      }
+    },
+    "voiceGenLive": {
+      "title": "Voice Gen Live",
+      "description": "Real-time voice generation with instant playback",
+      "category": "Voice Gen Live",
+      "enterText": "Enter text to stream",
+      "startStream": "Start Stream",
+      "stopStream": "Stop Stream",
+      "help": {
+        "step1": "Step 1: Enter Text",
+        "step1Desc": "Type the text you want to convert to voice in the input field.",
+        "step2": "Step 2: Select Voice Style",
+        "step2Desc": "Choose from Woman, Man, Boy, or Girl voice styles.",
+        "step3": "Step 3: Start Streaming",
+        "step3Desc": "Click \"Start Stream\" to begin real-time voice generation. The audio will play as it's generated with smart pausing.",
+        "step4": "Step 4: Control Playback",
+        "step4Desc": "Use the Stop button to end the stream. The system automatically pauses at natural break points for better listening experience."
+      }
+    },
+    "translate": {
+      "title": "Translate",
+      "description": "Multi-language translation for scripts and captions",
+      "category": "Translation",
+      "sourceLanguage": "Source Language",
+      "targetLanguage": "Target Language",
+      "enterText": "Enter text to translate",
+      "translatedText": "Translated text",
+      "translate": "Translate",
+      "help": {
+        "step1": "Step 1: Enter Text",
+        "step1Desc": "Type or paste the text you want to translate into the source text area.",
+        "step2": "Step 2: Select Languages",
+        "step2Desc": "Choose the source language (language of your text) and target language (language to translate to) from the dropdown menus. Use the swap button to quickly switch between them.",
+        "step3": "Step 3: Translate",
+        "step3Desc": "Click \"Translate\" to convert your text. The translated text will appear in the target text area.",
+        "step4": "Step 4: Copy or Use",
+        "step4Desc": "Use the copy button to copy the translated text to your clipboard, or directly use it from the text area."
+      }
+    },
+    "contentCreator": {
+      "title": "Content Creator",
+      "description": "Write hooks, captions, and social-ready scripts",
+      "category": "Scripts & Ideas",
+      "selectContentType": "Select Content Type",
+      "enterTopic": "Enter topic",
+      "selectTone": "Select Tone",
+      "generateContent": "Generate Content",
+      "help": {
+        "step1": "Step 1: Select Content Type",
+        "step1Desc": "Choose what you want to create: Hook (attention-grabbing opening lines), Caption (social media captions), Script (video scripts), or Hashtags (relevant hashtag suggestions).",
+        "step2": "Step 2: Enter Topic",
+        "step2Desc": "Describe your topic or what you want to create content about.",
+        "step3": "Step 3: Choose Tone",
+        "step3Desc": "Select the tone that matches your brand: Engaging, Professional, Casual, Funny, Inspiring, or Dramatic.",
+        "step4": "Step 4: Generate",
+        "step4Desc": "Click \"Generate Content\" to create your content. Use the copy button to copy the generated text to your clipboard."
+      }
+    },
+    "storyCreator": {
+      "title": "Story Creator",
+      "description": "Generate long-form storylines and narratives",
+      "category": "Scripts & Ideas",
+      "enterStoryPrompt": "Enter story prompt",
+      "selectGenre": "Select Genre",
+      "chooseLength": "Choose Length",
+      "setTone": "Set Tone",
+      "generateStory": "Generate Story",
+      "help": {
+        "step1": "Step 1: Enter Story Prompt",
+        "step1Desc": "Describe your story idea, theme, or starting point in the prompt field.",
+        "step2": "Step 2: Select Genre",
+        "step2Desc": "Choose a genre: Fantasy, Sci-Fi, Mystery, Romance, Thriller, or Adventure.",
+        "step3": "Step 3: Choose Length",
+        "step3Desc": "Select story length: Short (500-1000 words), Medium (2000-5000 words), or Long (5000+ words).",
+        "step4": "Step 4: Set Tone",
+        "step4Desc": "Pick the narrative tone: Engaging, Dramatic, Mysterious, Lighthearted, Epic, or Intimate.",
+        "step5": "Step 5: Generate Story",
+        "step5Desc": "Click \"Generate Story\" to create your long-form narrative. Copy or download the generated story when complete."
+      }
+    },
+    "srtSub": {
+      "title": "SRT Sub",
+      "description": "Translate and adapt existing SRT subtitle files",
+      "category": "Translation",
+      "uploadSrtFile": "Upload SRT File",
+      "translateSrt": "Translate SRT",
+      "help": {
+        "step1": "Step 1: Upload SRT File",
+        "step1Desc": "Upload your existing SRT subtitle file by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Select Languages",
+        "step2Desc": "Choose the source language (language of your SRT file) and target language (language to translate to). Use the swap button to switch languages.",
+        "step3": "Step 3: Translate",
+        "step3Desc": "Click \"Translate SRT\" to process your subtitle file. The system will translate all subtitle entries while preserving timing.",
+        "step4": "Step 4: Preview & Download",
+        "step4Desc": "Use the Preview button to review translated subtitles. Each entry shows the ID, time codes, and translated text. Download the translated SRT file when ready."
+      }
+    },
+    "recapper": {
+      "title": "Recapper",
+      "description": "Turn videos into recap scripts with tone and POV",
+      "category": "Scripts & Ideas",
+      "uploadVideo": "Upload Video",
+      "selectTone": "Select Tone",
+      "choosePov": "Choose Point of View",
+      "generateRecapScript": "Generate Recap Script",
+      "help": {
+        "step1": "Step 1: Upload Video",
+        "step1Desc": "Upload your video file (MP4, WebM, OGG, MOV) by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Select Tone",
+        "step2Desc": "Choose the tone for your recap: Engaging, Professional, Casual, Dramatic, Humorous, or Informative.",
+        "step3": "Step 3: Choose Point of View",
+        "step3Desc": "Select the narrative perspective: First Person (I, me, my), Second Person (You, your), Third Person (He, she, they), or Narrator (objective storytelling).",
+        "step4": "Step 4: Generate Recap Script",
+        "step4Desc": "Click \"Generate Recap Script\" to create your recap. The system analyzes your video and creates a script matching your selected tone and POV. Copy or download the script when complete."
+      }
+    },
+    "thumbnail": {
+      "title": "Thumbnail",
+      "description": "Design scroll-stopping thumbnails with prompts",
+      "category": "Pro Designer",
+      "enterThumbnailPrompt": "Enter thumbnail prompt",
+      "selectStyle": "Select Style",
+      "chooseAspectRatio": "Choose Aspect Ratio",
+      "generateThumbnail": "Generate Thumbnail",
+      "help": {
+        "step1": "Step 1: Enter Thumbnail Prompt",
+        "step1Desc": "Describe your thumbnail in detail. Include visual elements, colors, text overlays, and style. Example: \"A futuristic cityscape at sunset with neon lights, bold text overlay saying TECH REVIEW\".",
+        "step2": "Step 2: Select Style",
+        "step2Desc": "Choose a visual style: Bold (high contrast), Minimal (clean and simple), Vibrant (colorful), Dramatic (intense), Professional (polished), or Playful (fun and creative).",
+        "step3": "Step 3: Choose Aspect Ratio",
+        "step3Desc": "Select the format: 16:9 (YouTube standard), 9:16 (TikTok/Shorts), 1:1 (Square/Instagram), or 4:3 (Classic format).",
+        "step4": "Step 4: Generate & Download",
+        "step4Desc": "Click \"Generate Thumbnail\" to create your image. Preview the result and download when satisfied."
+      }
+    },
+    "novelTranslator": {
+      "title": "Novel Translator",
+      "description": "Translate long-form documents and ebooks",
+      "category": "Translation",
+      "uploadDocument": "Upload Document",
+      "chooseOutputFormat": "Choose Output Format",
+      "translateDocument": "Translate Document",
+      "help": {
+        "step1": "Step 1: Upload Document",
+        "step1Desc": "Upload your document file (TXT or DOCX format) by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Select Languages",
+        "step2Desc": "Choose the source language (language of your document) and target language (language to translate to). Use the swap button to switch languages.",
+        "step3": "Step 3: Choose Output Format",
+        "step3Desc": "Select the format for your translated document: TXT (plain text) or DOCX (Microsoft Word format).",
+        "step4": "Step 4: Translate",
+        "step4Desc": "Click \"Translate Document\" to process your file. The system will translate the entire document while preserving formatting. Download the translated document when complete."
+      }
+    },
+    "videoRecap": {
+      "title": "Video Recap",
+      "description": "Sync voiceovers, remove original audio, and add logos",
+      "category": "Studio Editor",
+      "uploadVideo": "Upload Video",
+      "uploadVoiceoverAudio": "Upload Voiceover Audio (Optional)",
+      "uploadLogo": "Upload Logo (Optional)",
+      "removeOriginalAudio": "Remove Original Audio",
+      "processVideo": "Process Video",
+      "help": {
+        "step1": "Step 1: Upload Video",
+        "step1Desc": "Upload your video file (MP4, WebM, OGG, MOV) by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Add Voiceover (Optional)",
+        "step2Desc": "Upload an audio file (MP3, WAV, OGG, M4A) to replace or sync with the video audio. Use the sync offset slider to adjust timing.",
+        "step3": "Step 3: Add Logo (Optional)",
+        "step3Desc": "Upload a logo image (PNG, JPG, WebP, SVG). Customize the position (top-left, top-right, bottom-left, bottom-right, center), size (small, medium, large), and opacity.",
+        "step4": "Step 4: Configure Audio",
+        "step4Desc": "Toggle \"Remove Original Audio\" to replace the video's audio with your voiceover. If disabled, the voiceover will be mixed with the original audio.",
+        "step5": "Step 5: Process Video",
+        "step5Desc": "Click \"Process Video\" to generate your final video with synced voiceover, removed original audio (if enabled), and added logo. Download the processed video when complete."
+      }
+    },
+    "masterEditor": {
+      "title": "Master Editor",
+      "description": "Browser-based video editing",
+      "category": "Studio Editor",
+      "trim": "Trim",
+      "addText": "Add Text",
+      "filters": "Filters",
+      "adjust": "Adjust",
+      "speed": "Speed",
+      "exportVideo": "Export Video",
+      "help": {
+        "step1": "Step 1: Upload Video",
+        "step1Desc": "Upload your video file (MP4, WebM, OGG, MOV) by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Use Editing Tools",
+        "step2Desc": "Click on any editing tool to activate it:",
+        "step2List1": "Trim: Set start and end times to cut your video. Use sliders or \"Set to Current\" buttons.",
+        "step2List2": "Add Text: Enter text to overlay on your video.",
+        "step2List3": "Filters: Apply visual filters (Vintage, B&W, Warm, Cool, Dramatic, or None).",
+        "step2List4": "Adjust: Use sliders to adjust brightness, contrast, and saturation.",
+        "step2List5": "Speed: Change playback speed from 0.25x to 2x.",
+        "step3": "Step 3: Preview Changes",
+        "step3Desc": "All changes are applied in real-time. Use the video player to preview your edits.",
+        "step4": "Step 4: Export",
+        "step4Desc": "Select export format (MP4, WebM, MOV) and quality (1080p, 720p, 480p), then click \"Export Video\" to download your edited video."
+      }
+    },
+    "subGen": {
+      "title": "Sub Gen",
+      "description": "Create perfectly-timed SRT subtitle files",
+      "category": "Video to Text",
+      "uploadMedia": "Upload Media",
+      "generateSrt": "Generate SRT",
+      "help": {
+        "step1": "Step 1: Upload Media",
+        "step1Desc": "Upload your audio or video file (MP3, WAV, OGG, M4A for audio; MP4, WebM, OGG, MOV for video) by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Preview Media",
+        "step2Desc": "Preview your uploaded media using the built-in player to ensure it's the correct file.",
+        "step3": "Step 3: Generate SRT",
+        "step3Desc": "Click \"Generate SRT\" to process your media. The system will transcribe the audio and create timed subtitle entries.",
+        "step4": "Step 4: Preview & Download",
+        "step4Desc": "Use the Preview button to review the generated subtitle entries. Each entry shows the ID, time codes, and text. Download the SRT file when ready."
+      }
+    },
+    "transcribe": {
+      "title": "Transcribe",
+      "description": "Convert audio or video to text",
+      "category": "Video to Text",
+      "uploadMedia": "Upload Media",
+      "transcribe": "Transcribe",
+      "help": {
+        "step1": "Step 1: Upload Media",
+        "step1Desc": "Upload your audio or video file (MP3, WAV, OGG, M4A for audio; MP4, WebM, OGG, MOV for video) by clicking the upload area or dragging and dropping.",
+        "step2": "Step 2: Preview Media",
+        "step2Desc": "Preview your uploaded media using the built-in player to ensure it's the correct file.",
+        "step3": "Step 3: Transcribe",
+        "step3Desc": "Click \"Transcribe\" to process your media. The system will convert the audio to plain text transcription.",
+        "step4": "Step 4: Copy or Download",
+        "step4Desc": "Use the Copy button to copy the transcribed text to your clipboard, or download it as a .txt file."
+      }
+    },
+    "newsAutomation": {
+      "title": "News Automation",
+      "description": "Automate news collection, translation, and email delivery",
+      "category": "Automation",
+      "selectNewsSource": "Select News Source",
+      "chooseTargetLanguage": "Choose Target Language",
+      "generateImage": "Generate Image",
+      "email": "Email",
+      "subject": "Subject",
+      "schedule": "Schedule",
+      "frequency": "Frequency",
+      "help": {
+        "step1": "Step 1: Select News Source",
+        "step1Desc": "Choose a news source from the dropdown (CNN, BBC, Reuters, etc.).",
+        "step2": "Step 2: Choose Target Language",
+        "step2Desc": "Select the language you want the news translated to.",
+        "step3": "Step 3: Configure Options",
+        "step3Desc": "Toggle \"Generate Image\" if you want AI-generated images included with the news. Enter the recipient email address and customize the email subject line.",
+        "step4": "Step 4: Set Schedule (Optional)",
+        "step4Desc": "Enable scheduling to automate news delivery. Choose frequency (Once, Daily, Weekly, or Custom) and set the time. The system will automatically collect, translate, and email news at the scheduled time.",
+        "step5": "Step 5: Start Automation",
+        "step5Desc": "Click \"Start\" to begin the automation process. The system will collect news, translate it, generate images (if enabled), and send it to the specified email address."
+      }
+    }
+  },
+  "home": {
+    "title": "Your AI Minions",
+    "subtitle": "All-in-one AI suite for content creation",
+    "available": "Available",
+    "comingSoon": "Coming Soon"
+  }
+}
