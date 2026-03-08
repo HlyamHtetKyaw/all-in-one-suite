@@ -176,6 +176,16 @@ const FEATURES: FeatureCard[] = [
     status: 'available',
     href: '/news-automation',
   },
+  {
+    id: 'viral-shorts',
+    category: 'Shorts',
+    title: 'Viral Shorts',
+    description: 'AI finds viral moments; trim, preview, or combine segments into 9:16 vertical.',
+    accentFrom: 'from-amber-500',
+    accentTo: 'to-orange-500',
+    status: 'available',
+    href: '/viral-shorts',
+  },
 ];
 
 export default function Header({ isAuthenticated, user, points, onLoginClick, onLogout }: HeaderProps) {

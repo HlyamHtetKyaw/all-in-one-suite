@@ -165,6 +165,16 @@ const FEATURES: FeatureCard[] = [
     status: 'available',
     href: '/news-automation',
   },
+  {
+    id: 'viral-shorts',
+    category: 'Shorts',
+    title: 'Viral Shorts',
+    description: 'AI finds viral moments in long videos; trim, preview, or combine any two segments into 9:16 vertical.',
+    accentFrom: 'from-amber-500',
+    accentTo: 'to-orange-500',
+    status: 'available',
+    href: '/viral-shorts',
+  },
 ];
 
 interface HomeProps {
