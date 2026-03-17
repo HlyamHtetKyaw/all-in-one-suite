@@ -36,7 +36,7 @@ function formatTime(seconds: number): string {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-export default function ViralShorts({ isAuthenticated, onLoginClick }: ViralShortsProps) {
+export default function ViralShorts({ isAuthenticated: _isAuthenticated, onLoginClick: _onLoginClick }: ViralShortsProps) {
   const [step, setStep] = useState<Step>('upload');
   const [uploadId, setUploadId] = useState<string | null>(null);
   const [filename, setFilename] = useState<string | null>(null);

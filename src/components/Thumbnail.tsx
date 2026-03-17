@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
-import { Image, Loader2, AlertCircle, Upload, Download, X, Sparkles, HelpCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Image, Loader2, AlertCircle, Download, Sparkles, HelpCircle } from 'lucide-react';
 import HelpDialog from './HelpDialog';
+import { base64ToDataUrl, generateImage, type ImageProvider, type TextMode } from '../lib/generateImage';
 
 interface ThumbnailProps {
   isAuthenticated: boolean;
@@ -27,11 +28,13 @@ export default function Thumbnail({ isAuthenticated, onLoginClick }: ThumbnailPr
   const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('bold');
   const [aspectRatio, setAspectRatio] = useState('16:9');
+  const [provider, setProvider] = useState<ImageProvider>('openai');
+  const [burmeseText, setBurmeseText] = useState('');
+  const [textMode, setTextMode] = useState<TextMode>('overlay');
   const [generatedThumbnail, setGeneratedThumbnail] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showHelp, setShowHelp] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleGenerate = async () => {
     if (!prompt.trim()) {
@@ -43,24 +46,36 @@ export default function Thumbnail({ isAuthenticated, onLoginClick }: ThumbnailPr
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/api/thumbnail/generate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt,
-          style,
-          aspectRatio,
-        }),
+      const fullPrompt =
+        `Create a ${style} YouTube-style thumbnail image. ` +
+        `Aspect ratio ${aspectRatio}. ` +
+        `Scene: ${prompt}.` +
+        (textMode === 'overlay'
+          ? ' Do not include any text in the image; text will be overlaid separately.'
+          : '');
+
+      const data = await generateImage({
+        provider,
+        prompt: fullPrompt,
+        size: aspectRatio,
+        burmeseText: burmeseText.trim() || undefined,
+        textMode,
+        overlay:
+          (textMode === 'overlay' || textMode === 'both') && burmeseText.trim()
+            ? {
+                position: 'bottom',
+                fontFamily: 'Noto Sans Myanmar',
+                fontSizePx: 84,
+                textColorHex: '#FFFFFF',
+                strokeColorHex: '#000000',
+                strokeWidthPx: 8,
+                paddingPx: 56,
+                addShadow: true,
+              }
+            : undefined,
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate thumbnail');
-      }
-
-      const data = await response.json();
-      setGeneratedThumbnail(data.imageUrl || data.thumbnail || '');
+      setGeneratedThumbnail(base64ToDataUrl(data.mimeType, data.imageBase64));
     } catch (err: any) {
       setError(err.message || 'Failed to generate thumbnail. Please try again.');
     } finally {
@@ -77,25 +92,6 @@ export default function Thumbnail({ isAuthenticated, onLoginClick }: ThumbnailPr
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-  };
-
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
-    if (!validTypes.includes(file.type)) {
-      setError('Please upload a valid image file (PNG, JPG, WebP)');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const imageUrl = e.target?.result as string;
-      setGeneratedThumbnail(imageUrl);
-      setError(null);
-    };
-    reader.readAsDataURL(file);
   };
 
   if (!isAuthenticated) {
@@ -148,6 +144,97 @@ export default function Thumbnail({ isAuthenticated, onLoginClick }: ThumbnailPr
         </div>
 
         <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="text-xs uppercase tracking-[0.16em] text-white/60 mb-2 block">
+                Provider
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setProvider('openai')}
+                  className={`p-3 rounded-xl border backdrop-blur-xl text-left transition-all duration-300 ${
+                    provider === 'openai'
+                      ? 'bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20'
+                      : 'bg-white/8 border-white/15 hover:bg-white/12'
+                  }`}
+                >
+                  <p className="text-sm font-medium text-white">OpenAI</p>
+                  <p className="text-xs text-white/50 mt-1">DALL·E base image</p>
+                </button>
+                <button
+                  onClick={() => setProvider('gemini')}
+                  className={`p-3 rounded-xl border backdrop-blur-xl text-left transition-all duration-300 ${
+                    provider === 'gemini'
+                      ? 'bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20'
+                      : 'bg-white/8 border-white/15 hover:bg-white/12'
+                  }`}
+                >
+                  <p className="text-sm font-medium text-white">Gemini</p>
+                  <p className="text-xs text-white/50 mt-1">Imagen base image</p>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs uppercase tracking-[0.16em] text-white/60 mb-2 block">
+                Burmese Text
+              </label>
+              <input
+                value={burmeseText}
+                onChange={(e) => setBurmeseText(e.target.value)}
+                placeholder="ဥပမာ: မင်္ဂလာပါ"
+                className="w-full px-4 py-3 bg-white/8 backdrop-blur-xl border border-white/15 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-amber-400/50 focus:bg-white/12 transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.05) 100%)'
+                }}
+              />
+              <p className="text-[11px] text-white/45 mt-2">
+                Choose whether AI draws this text, backend overlays it, or both.
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label className="text-xs uppercase tracking-[0.16em] text-white/60 mb-2 block">
+              Text Rendering Mode
+            </label>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <button
+                onClick={() => setTextMode('ai')}
+                className={`p-3 rounded-xl border backdrop-blur-xl text-left transition-all duration-300 ${
+                  textMode === 'ai'
+                    ? 'bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20'
+                    : 'bg-white/8 border-white/15 hover:bg-white/12'
+                }`}
+              >
+                <p className="text-sm font-medium text-white">AI text in image</p>
+                <p className="text-xs text-white/50 mt-1">Best-effort Burmese text</p>
+              </button>
+              <button
+                onClick={() => setTextMode('overlay')}
+                className={`p-3 rounded-xl border backdrop-blur-xl text-left transition-all duration-300 ${
+                  textMode === 'overlay'
+                    ? 'bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20'
+                    : 'bg-white/8 border-white/15 hover:bg-white/12'
+                }`}
+              >
+                <p className="text-sm font-medium text-white">Backend overlay</p>
+                <p className="text-xs text-white/50 mt-1">Guaranteed correct Burmese</p>
+              </button>
+              <button
+                onClick={() => setTextMode('both')}
+                className={`p-3 rounded-xl border backdrop-blur-xl text-left transition-all duration-300 ${
+                  textMode === 'both'
+                    ? 'bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20'
+                    : 'bg-white/8 border-white/15 hover:bg-white/12'
+                }`}
+              >
+                <p className="text-sm font-medium text-white">Both</p>
+                <p className="text-xs text-white/50 mt-1">AI tries + backend ensures</p>
+              </button>
+            </div>
+          </div>
+
           <div>
             <label className="text-xs uppercase tracking-[0.16em] text-white/60 mb-2 block">
               Thumbnail Prompt

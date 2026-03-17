@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Video, Loader2, Copy, Check, AlertCircle, Upload, FileText, Download, X, HelpCircle } from 'lucide-react';
+import { Video, Loader2, Copy, Check, AlertCircle, Upload, Download, X, HelpCircle } from 'lucide-react';
 import HelpDialog from './HelpDialog';
 
 interface RecapperProps {

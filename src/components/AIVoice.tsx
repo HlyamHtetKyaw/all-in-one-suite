@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Mic, Play, Pause, Download, Loader2, Volume2, FileText, AlertCircle, HelpCircle } from 'lucide-react';
+import { Mic, Play, Pause, Download, Loader2, Volume2, FileText, AlertCircle } from 'lucide-react';
 import HelpDialog from './HelpDialog';
 
 interface AIVoiceProps {

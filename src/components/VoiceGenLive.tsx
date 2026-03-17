@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Radio, Play, Pause, Square, Loader2, Volume2, AlertCircle, Zap, HelpCircle } from 'lucide-react';
+import { Radio, Square, Loader2, Volume2, AlertCircle, Zap, HelpCircle } from 'lucide-react';
 import HelpDialog from './HelpDialog';
 
 interface VoiceGenLiveProps {
@@ -18,7 +18,7 @@ export default function VoiceGenLive({ isAuthenticated, onLoginClick }: VoiceGen
   const [streamedText, setStreamedText] = useState<string[]>([]);
   const [showHelp, setShowHelp] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const streamIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const streamIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleStartStream = async () => {
     if (!currentText.trim()) {
@@ -32,7 +32,6 @@ export default function VoiceGenLive({ isAuthenticated, onLoginClick }: VoiceGen
     setStreamedText([]);
 
     const sentences = currentText.split(/[.!?]+/).filter(s => s.trim());
-    let currentIndex = 0;
 
     try {
       for (let i = 0; i < sentences.length; i++) {

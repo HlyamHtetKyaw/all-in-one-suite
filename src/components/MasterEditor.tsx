@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Scissors, Loader2, AlertCircle, Upload, Download, X, Video, Play, Pause, Type, Filter, Sliders, Zap, Save, HelpCircle } from 'lucide-react';
 import HelpDialog from './HelpDialog';
 
