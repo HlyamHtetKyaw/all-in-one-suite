@@ -175,6 +175,16 @@ const FEATURES: FeatureCard[] = [
     status: 'available',
     href: '/viral-shorts',
   },
+  {
+    id: 'm3u8-downloader',
+    category: 'Downloader',
+    title: 'M3U8 Downloader',
+    description: 'Batch download up to 10 m3u8 links and save as MP4 with episode names.',
+    accentFrom: 'from-emerald-500',
+    accentTo: 'to-teal-400',
+    status: 'available',
+    href: '/m3u8-downloader',
+  },
 ];
 
 interface HomeProps {

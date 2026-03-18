@@ -21,6 +21,7 @@ import Transcribe from './components/Transcribe';
 import NewsAutomation from './components/NewsAutomation';
 import ViralShorts from './components/ViralShorts';
 import WaterDropEffect from './components/WaterDropEffect';
+import M3U8BatchDownloader from './components/M3U8BatchDownloader';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
@@ -166,6 +167,10 @@ export default function App() {
             <Route
               path="/viral-shorts"
               element={<ViralShorts isAuthenticated={isAuthenticated} onLoginClick={() => setShowAuthPanel(true)} />}
+            />
+            <Route
+              path="/m3u8-downloader"
+              element={<M3U8BatchDownloader />}
             />
           </Routes>
             </div>

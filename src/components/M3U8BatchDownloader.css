@@ -1,0 +1,125 @@
+.m3u8-proto {
+  background: #ffffff;
+  color: #000000;
+  padding: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.m3u8-title {
+  margin: 0 0 8px;
+  color: #000000;
+}
+
+.m3u8-endpoint {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+  color: #000000;
+}
+
+.m3u8-topGrid {
+  display: grid;
+  grid-template-columns: 1fr 160px 160px;
+  gap: 10px;
+  align-items: end;
+}
+
+.m3u8-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 120px;
+  gap: 10px;
+  align-items: center;
+}
+
+.m3u8-divider {
+  margin: 14px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.m3u8-input {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.m3u8-button {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.m3u8-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.m3u8-button--row {
+  padding: 9px 12px;
+}
+
+.m3u8-progress {
+  margin-top: 6px;
+  height: 10px;
+  width: 100%;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.m3u8-progressBar {
+  height: 100%;
+  width: 0%;
+  background: #2563eb;
+  border-radius: 9999px;
+  transition: width 250ms linear;
+}
+
+.m3u8-progressBar--ready {
+  background: #16a34a;
+}
+
+@media (max-width: 720px) {
+  .m3u8-topGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .m3u8-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+.m3u8-textarea {
+  width: 100%;
+  min-height: 92px;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 10px;
+  outline: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  resize: vertical;
+}
+
+.m3u8-parseRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
