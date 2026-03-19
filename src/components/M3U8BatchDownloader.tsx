@@ -332,6 +332,10 @@ export default function M3U8BatchDownloader() {
             value={startEpisode}
             min={1}
             step={1}
+            onFocus={(e) => {
+              // Replace the whole number when user starts typing.
+              e.currentTarget.select();
+            }}
             onChange={(e) => {
               const raw = e.target.value;
               const next = parseInt(raw, 10);
@@ -347,6 +351,10 @@ export default function M3U8BatchDownloader() {
             value={endEpisode}
             min={1}
             step={1}
+            onFocus={(e) => {
+              // Replace the whole number when user starts typing.
+              e.currentTarget.select();
+            }}
             onChange={(e) => {
               const raw = e.target.value;
               const next = parseInt(raw, 10);
