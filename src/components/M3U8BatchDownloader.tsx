@@ -263,9 +263,9 @@ export default function M3U8BatchDownloader() {
 
   return (
     <div className="m3u8-proto">
-      <h2 className="m3u8-title">M3U8 Batch Downloader (Backend)</h2>
+      <h2 className="m3u8-title">HLS Batch Downloader (Backend)</h2>
       <div className="m3u8-endpoint">
-        Batch API: <code>{getBackendBase()}/api/m3u8/batch/start</code> and <code>/api/m3u8/batch/&lt;batchId&gt;/status</code>
+        Batch API is on your backend (it will run conversions and return MP4 files).
       </div>
       {batchId && (
         <div style={{ fontSize: 12, opacity: 0.85, marginBottom: 12, color: '#000000' }}>
@@ -275,12 +275,12 @@ export default function M3U8BatchDownloader() {
 
       <div style={{ marginBottom: 12 }}>
         <div style={{ fontSize: 13, marginBottom: 6, color: '#000000' }}>
-          Paste logs or lines containing <code>.m3u8</code> URLs (first link will map to <b>start episode</b>)
+          Paste logs or lines containing HLS playlist URLs (first link will map to <b>start episode</b>)
         </div>
         <textarea
           value={pasteText}
           onChange={(e) => setPasteText(e.target.value)}
-          placeholder={`Example:\n[3/18/26 9:54 PM] ... https://.../video-sd.m3u8\n...`}
+          placeholder=""
           className="m3u8-textarea"
         />
         <div className="m3u8-parseRow">
@@ -289,7 +289,7 @@ export default function M3U8BatchDownloader() {
             onClick={() => {
               const links = extractM3U8Links(pasteText);
               if (links.length === 0) {
-                setGlobalError('No .m3u8 links found in the pasted text.');
+                setGlobalError('No HLS playlist links found in the pasted text.');
                 return;
               }
               setGlobalError(null);
@@ -330,7 +330,13 @@ export default function M3U8BatchDownloader() {
           <input
             type="number"
             value={startEpisode}
-            onChange={(e) => setStartEpisode(parseInt(e.target.value || '1', 10))}
+            min={1}
+            step={1}
+            onChange={(e) => {
+              const raw = e.target.value;
+              const next = parseInt(raw, 10);
+              if (Number.isFinite(next)) setStartEpisode(next);
+            }}
             className="m3u8-input"
           />
         </label>
@@ -339,7 +345,13 @@ export default function M3U8BatchDownloader() {
           <input
             type="number"
             value={endEpisode}
-            onChange={(e) => setEndEpisode(parseInt(e.target.value || '1', 10))}
+            min={1}
+            step={1}
+            onChange={(e) => {
+              const raw = e.target.value;
+              const next = parseInt(raw, 10);
+              if (Number.isFinite(next)) setEndEpisode(next);
+            }}
             className="m3u8-input"
           />
         </label>
@@ -377,14 +389,13 @@ export default function M3U8BatchDownloader() {
                     return next;
                   })
                 }
-                placeholder="https://.../index.m3u8"
                 className="m3u8-input"
               />
               <button
                 onClick={async () => {
                   const value = urls[idx]?.trim() ?? '';
                   if (!value) {
-                    setGlobalError('Please paste an m3u8 link first for this row.');
+                    setGlobalError('Please paste an HLS playlist link first for this row.');
                     return;
                   }
                   const ep = episodeNumbers[idx];

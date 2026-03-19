@@ -41,7 +41,7 @@ function AppInner({
   handleAuthenticated: () => void;
 }) {
   const location = useLocation();
-  const isM3U8 = location.pathname === '/m3u8-downloader';
+  const isM3U8 = location.pathname === '/downloader';
 
   return (
     <div
@@ -136,7 +136,7 @@ function AppInner({
             path="/viral-shorts"
             element={<ViralShorts isAuthenticated={isAuthenticated} onLoginClick={onLoginClick} />}
           />
-          <Route path="/m3u8-downloader" element={<M3U8BatchDownloader />} />
+          <Route path="/downloader" element={<M3U8BatchDownloader />} />
         </Routes>
       </div>
 

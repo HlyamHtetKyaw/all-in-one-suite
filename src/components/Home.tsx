@@ -176,14 +176,14 @@ const FEATURES: FeatureCard[] = [
     href: '/viral-shorts',
   },
   {
-    id: 'm3u8-downloader',
+    id: 'hls-downloader',
     category: 'Downloader',
-    title: 'M3U8 Downloader',
-    description: 'Batch download up to 10 m3u8 links and save as MP4 with episode names.',
+    title: 'HLS Downloader',
+    description: 'Batch download up to 10 HLS playlist links and save as MP4 with episode names.',
     accentFrom: 'from-emerald-500',
     accentTo: 'to-teal-400',
     status: 'available',
-    href: '/m3u8-downloader',
+    href: '/downloader',
   },
 ];
 

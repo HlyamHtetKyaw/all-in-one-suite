@@ -50,6 +50,17 @@
   outline: none;
 }
 
+/* Hide number spinners to look like a simple input */
+.m3u8-input[type='number']::-webkit-outer-spin-button,
+.m3u8-input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.m3u8-input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .m3u8-button {
   background: #2563eb;
   color: #ffffff;
