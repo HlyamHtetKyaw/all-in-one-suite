@@ -22,6 +22,7 @@ import NewsAutomation from './components/NewsAutomation';
 import ViralShorts from './components/ViralShorts';
 import WaterDropEffect from './components/WaterDropEffect';
 import M3U8BatchDownloader from './components/M3U8BatchDownloader';
+import AllInOne from './AllInOne';
 
 function AppInner({
   isAuthenticated,
@@ -137,6 +138,7 @@ function AppInner({
             element={<ViralShorts isAuthenticated={isAuthenticated} onLoginClick={onLoginClick} />}
           />
           <Route path="/downloader" element={<M3U8BatchDownloader />} />
+          <Route path="/all-in-one" element={<AllInOne />} />
         </Routes>
       </div>
 
